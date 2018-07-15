@@ -81,3 +81,9 @@ deploy:
   type: git
   repo: git@github.com:erikgeiser/ctf-writeups.git
   branch: gh-pages
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
