@@ -14,7 +14,7 @@ timezone:
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://erikgeiser.github.io/
-root: /ctf-writeups
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -43,7 +43,7 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-  
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -52,7 +52,7 @@ index_generator:
   path: ''
   per_page: 10
   order_by: -date
-  
+
 # Category & Tag
 default_category: CTF
 category_map:
@@ -79,11 +79,10 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:erikgeiser/ctf-writeups.git
+  repo: git@github.com:erikgeiser/erikgeiser.github.io.git
   branch: gh-pages
 
 feed:
   type: atom
   path: atom.xml
   limit: 20
-
