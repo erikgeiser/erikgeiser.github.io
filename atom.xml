@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://erikgeiser.github.io/"/>
+  <link href="https://erikgeiser.com/"/>
   <updated>2018-07-20T12:56:41.040Z</updated>
-  <id>https://erikgeiser.github.io/</id>
+  <id>https://erikgeiser.com/</id>
   
   <author>
     <name>Erik Geiser</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Necromancer</title>
-    <link href="https://erikgeiser.github.io/2017/12/17/necromancer/"/>
-    <id>https://erikgeiser.github.io/2017/12/17/necromancer/</id>
+    <link href="https://erikgeiser.com/2017/12/17/necromancer/"/>
+    <id>https://erikgeiser.com/2017/12/17/necromancer/</id>
     <published>2017-12-17T16:53:11.000Z</published>
     <updated>2018-07-20T12:56:41.040Z</updated>
     
@@ -35,14 +35,14 @@
     </summary>
     
     
-      <category term="CTF-Writeups" scheme="https://erikgeiser.github.io/tags/CTF-Writeups/"/>
+      <category term="CTF-Writeups" scheme="https://erikgeiser.com/tags/CTF-Writeups/"/>
     
   </entry>
   
   <entry>
     <title>Nebula</title>
-    <link href="https://erikgeiser.github.io/2017/03/15/nebula/"/>
-    <id>https://erikgeiser.github.io/2017/03/15/nebula/</id>
+    <link href="https://erikgeiser.com/2017/03/15/nebula/"/>
+    <id>https://erikgeiser.com/2017/03/15/nebula/</id>
     <published>2017-03-15T14:43:28.000Z</published>
     <updated>2018-07-20T12:56:21.467Z</updated>
     
@@ -58,7 +58,7 @@
     </summary>
     
     
-      <category term="CTF-Writeups" scheme="https://erikgeiser.github.io/tags/CTF-Writeups/"/>
+      <category term="CTF-Writeups" scheme="https://erikgeiser.com/tags/CTF-Writeups/"/>
     
   </entry>
   
