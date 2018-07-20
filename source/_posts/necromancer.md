@@ -1,7 +1,7 @@
 ---
-title: "Necromancer"
-date: 2017-12-17 17:53:11 +0100
-tags: CFT
+title: Necromancer
+date: 2017-12-17 17:53:11
+tags: CTF-Writeups
 ---
 
 The Necromancer CTF (available at [vulnhub](https://www.vulnhub.com/entry/the-necromancer-1,154/)) sends you on a journey to defeat the Necromancer that inhabits the OpenBSD based image. The fact that the flags kind of resembles an overarching story is a really nice touch on otherwise technically interresting but dry CTFs.

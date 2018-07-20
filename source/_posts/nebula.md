@@ -1,7 +1,7 @@
 ---
 title: Nebula
 date: 2017-03-15 15:43:28
-tags: CTF
+tags: CTF-Writeups
 ---
 
 This is a writeup of the Nebula CTF from [Exploit Exercises](https://exploit-exercises.com/). Although there is already a huge number of solutions I find it still valuable to add more since everyones has another thought process and one might still learn something new in different writeups. Also it is nice to have a reference of problems ones has solved at some point.
