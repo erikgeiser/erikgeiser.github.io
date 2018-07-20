@@ -80,7 +80,7 @@ theme: landscape
 deploy:
   type: git
   repo: git@github.com:erikgeiser/erikgeiser.github.io.git
-  branch: gh-pages
+  branch: master
 
 feed:
   type: atom
