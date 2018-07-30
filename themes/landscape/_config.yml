@@ -2,6 +2,9 @@
 menu:
   Home: /
   Archives: /archives
+  About Me: /aboutme
+  Imprint: /imprint
+  Privacy Policy: /privacy-policy
 rss: /atom.xml
 
 # Content
