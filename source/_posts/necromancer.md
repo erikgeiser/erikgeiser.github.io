@@ -788,7 +788,7 @@ Before you, a large door with the symbol of a skull engraved into the surface.
 Looking closer at the skull, you can see u161 engraved into the forehead.
 ```
 
-### 7th Flag: Ancient services
+### 7th Flag: Uncommon services
 
 Spooky, but it seems we survived the encounter. In addition to the hint to UDP port 161 the necromancer links to the download of a binary file.
 
@@ -874,7 +874,7 @@ iso.3.6.1.2.1.1.6.0 = STRING: "Locked - death2allrw!"
 End of MIB
 ```
 
-So it's not that easy. At this point I almost gave up, as I did not understand SNMP well enough, but I guess it's sometimes necessary to dive deep into ancient protocols.
+So it's not that easy. At this point I almost gave up, as I did not understand SNMP well enough, but I guess it's sometimes necessary to dive deep into uncommon protocols.
 
 I guess the `snmp` equivalent of unlocking a door is setting the value of the "Locked..." string to something else. A specific value is probably needed so I read the `snmpwalk` output again and notice the unusual capitalization of "Unlocked", which also happens to be a plausible value for the string.
 
@@ -905,7 +905,7 @@ It worked! The answer points to `tcp/22` (SSH) which looks like we are about to 
 ```
 root@kali:~/ctf/necromancer# ncrack -p 22 --user demonslayer -P /usr/share/wordlists/rockyou.txt 10.0.2.10
 
-Starting Ncrack 0.6 ( http://ncrack.org ) at 2018-04-01 13:51 CEST
+Starting Ncrack 0.6 ( http://ncrack.org ) at 2017-12-17 13:51 CEST
 Stats: 0:00:14 elapsed; 0 services completed (1 total)
 Rate: 43.67; Found: 1; About 0.00% done
 (press 'p' to list discovered credentials)
@@ -979,7 +979,7 @@ Well, just when I thought we were on the offensive we are forced to parry. We lo
 
 ```
 root@kali:~/ctf/necromancer# nmap -sU -p 777 10.0.2.10
-Starting Nmap 7.70 ( https://nmap.org ) at 2018-04-01 13:59 CEST
+Starting Nmap 7.70 ( https://nmap.org ) at 2017-12-17 13:59 CEST
 Nmap scan report for 10.0.2.10
 Host is up (0.00018s latency).
 
