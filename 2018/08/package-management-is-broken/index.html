@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Package management is broken on all platforms | Erik&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="My friends, I gathered you here today to present a discussion starter which, for all intends and purposes, might as well just be called a rant. I do understand that the title might sound a little extr">
+<meta name="keywords" content="Opinion">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Package management is broken on all platforms">
+<meta property="og:url" content="https://erikgeiser.com/2018/08/package-management-is-broken/index.html">
+<meta property="og:site_name" content="Erik&#39;s Blog">
+<meta property="og:description" content="My friends, I gathered you here today to present a discussion starter which, for all intends and purposes, might as well just be called a rant. I do understand that the title might sound a little extr">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-01T09:51:33.814Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Package management is broken on all platforms">
+<meta name="twitter:description" content="My friends, I gathered you here today to present a discussion starter which, for all intends and purposes, might as well just be called a rant. I do understand that the title might sound a little extr">
+  
+    <link rel="alternate" href="/atom.xml" title="Erik&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Erik&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">IT Security and CTF Write-ups</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about-me">About Me</a>
+        
+          <a class="main-nav-link" href="/imprint">Imprint</a>
+        
+          <a class="main-nav-link" href="/privacy-policy">Privacy Policy</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://erikgeiser.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-package-management-is-broken" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/package-management-is-broken/" class="article-date">
+  <time datetime="2018-08-01T14:31:06.000Z" itemprop="datePublished">01-08-2018</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Package management is broken on all platforms
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>My friends, I gathered you here today to present a discussion starter which, for all intends and purposes, might as well just be called a rant. I do understand that the title might sound a little extreme, but let me present my arguments before you judge. The underlying issue of this <del>rant</del> blog post came to my attention while observing the transition that the Linux ecosystem went through in terms of packaging. Let me start to explain myself with the situation on Windows, as this builds up my expectations of package management.</p>
+<h4 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h4><p>What might seem really ridiculous to most Linux users is the norm for Windows users: Installing random binary files from all over the internet. Advanced users may be cautious about the source from which they are downloading the files, but checksums are rarely used in my experience. This is a major contribution to Windows’ notoriety in terms of security. And it’s not just the fact that the binaries may be malicious, many portals bundle all kinds of unwanted software with the installer.</p>
+<p>Now that we’ve covered the process of software acquirement we move on to the state of the union with regards to dependency management. I think everyone that has used Windows has at some point discovered the plethora of installed C++ redistributable packages. Multiple versions for both x32 and x64 architectures are bound to fill the installed software screen over time. That’s maybe the example that is most visible. Most dependencies, however, do not appear there and quietly reside in the installation folder, blissfully unaware that they are completely redundant. This is the price you pay for portability. However, to complete the calculation one has to factor in the security impact, as vulnerabilities have to be patched for each occurrence of each dependency and not even by the dependency vendor but by the application packager/developer which might not even be active anymore.</p>
+<p>The next point on the list concerns application updating. Most of the time each application has it’s own updater. Some of them run only when the application in question is running, some run always in the background. The result is that the user has to make sure that each application is up to date separately. A software developer might say the update complexity is linear in the number of installed packages. So far, so annoying. On top of that there are a number of applications that only check for updates and direct the user to the download page of the current version. This introduces additional work and also the problem of not knowing how the updating process behaves: Does the installer notice the installed version and upgrade it nicely or is the user expected to uninstall the old version first? Most of the time the former is the case, but what’s annoying is that this is rarely communicated.</p>
+<p>I won’t even mentioned Microsoft’s sad excuse of an app store. Some of the aforementioned problems are generally really hard to solve but other operating systems have already ascended past this state. Let’s take the rant to the next level.</p>
+<h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><p>Coming from Windows, the Linux way of managing packages seems like heaven at the first glance. One can just install a package from the command line or app center without worrying if the download source is reputable and in the knowledge that everything is at least somewhat curated. Updating the installed software happens alongside updating the system with one simple command. Libraries are shared among installed software allowing us to save resources and to make sure that security patches are deployed for every application. It seems like we’ve found the holy grail of package management, but it’s not all sunshine and rainbows in Linux land.</p>
+<p>Firstly we have the opposite situation of Windows’ dependency management. Everything that’s to be gained in terms of security and decreased redundancy is payed for in the currency of portability. Developers do not only have to submit their work to the repository maintainers of each large distro, they also have to worry about what shared libraries are available on each one of them. Often this means that the current version of an application may only be available once the distro decides to ship a newer set of libraries. I understand that you probably can’t have the best of both worlds and I agree that it’s a compromise that is worth taking over the Windows situation. However, it also leads me to my main point.</p>
+<p>Over time I’ve noticed the trend that the system package manager or rather the default repositories are circumvented in an increasing rate. People want to use up-to-date software, not just in terms of security patches but also in terms of features. Developers want to ship their latest improvements. The bottleneck is that the process of getting these versions approved is often too slow or too bothersome for developers, especially those with fast release cycles. The result is that setting up a Linux installation today relies heavily on adding new developer controlled repositories for a lot of products. In my case it starts with Chrome, Atom, Slack and goes on and on and on. We’ve lost the aspect of curation and open up a lot of attack vectors. But we still have a central way for installing, uninstalling and updating, right?</p>
+<p>We all want more Linux adoption and key to achieving this is the availability of commonly used software. This burdens the developers with making sure their software is available for Debian, Red Hat, Arch and more, including their derivates. The solution recently brought forward are formats such as Snaps or AppImages which solve the issue of portability and fast deployment of changes. This however costs us our central place in the system to manage packages and introduces redundant dependencies.</p>
+<p>Other vendors like Nodejs are actively encouraging users to download installation scripts via curl and pipe them into bash. This is seriously insane and unsafe and does not solve any of the other problems in a satisfying way. Some might argue that it’s not that unsafe if you take a look at the script first, provided you are familiar to bash. To those I recommend reading <a href="https://www.idontplaydarts.com/2016/04/detecting-curl-pipe-bash-server-side/" target="_blank" rel="noopener">this</a>. Basically it’s a way to detect the use of curl piped into bash at the server side such that the payload can be changed depending on it the script is only viewed or actually executed. If you don’t have time to read the article you just have to remember to scrutinize the script in question like this: <code>curl https://example.com/setup.bash | (sleep 3; cat)</code>. Truly not ideal.</p>
+<p>Slowly we are converging from the perceived holy grail of packaging to the same situation Windows is in. I refuse to believe that this situation is the final destination of the whole issue. Maybe macOS has a solution?</p>
+<h4 id="macOS"><a href="#macOS" class="headerlink" title="macOS"></a>macOS</h4><p>Looking at macOS, we are overwhelmed by the different ways of installing packages. There is the app store which is actively used by developers and offers updating alongside the operating system similar to Linux. The majority of packages, however, are downloaded from random sites in the internet in the form of <code>.dmg</code> or <code>.app</code> packages, similar to how Windows handles it. A very notable downside is that it’s sometimes the case that the uninstaller is bundled with the installer in a <code>.dmg</code>. To uninstall the package you have to search for the <code>.dmg</code> again which you probably won’t even have on you machine anymore at that point.</p>
+<p>Fellow developers will probably already be shouting for Homebrew or MacPorts. I can’t speak for MacPorts as I’m a brew user but let’s have a look. Brew combines a very large repertoire with rapid deployments of new versions. This is of course accompanied with decreased curation and security. Another annoying observation I made is based in the way updates are sometimes handled. A upgrade of a minor python version is accompanied with a complete loss of all site packages, leaving the binaries (or in this case rather something like “application starters”) for example in <code>/usr/local/bin</code> orphaned. So a simple update may deprive you of IPython, Ansible or Mercurial without warning.</p>
+<p>Graphical applications are only covered with brew cask, which works exactly like a normal installation of an <code>.app</code> or <code>.dmg</code> apart from introducing confusion about the updating process. These application usually come with their own updater as they are expected to be installed without a package manager but brew is also able to pull new versions. At least the uninstallation will be guaranteed painless.</p>
+<p>All in all the situation on macOS resembles a mixture of Windows and something like the Arch User Repository. There is not much insight to be gained here.</p>
+<h4 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h4><p>As I already said, on all operating systems we are converging to a situation we did not want to have in the first place. I situation we already thought to have overcome. New approaches only accelerate this convergence and instead of providing new ideas it just seems like old ones are just circumvented where needed. Maybe I’m to cynical or don’t see the whole picture, but I can’t see the light at the horizon. Maybe I also made a mistake somewhere in my assessment. I would really like to hear about your opinion on this matter. Contact me on <code>contact *dot* eg *at* posteo *dot* net</code>.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://erikgeiser.com/2018/08/package-management-is-broken/" data-id="cjkavxe290001r40i4rhn1747" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Opinion/">Opinion</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/necromancer/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Necromancer</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-Writeups/">CTF-Writeups</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Opinion/">Opinion</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/08/package-management-is-broken/">Package management is broken on all platforms</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/necromancer/">Necromancer</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/nebula/">Nebula</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Erik Geiser<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about-me" class="mobile-nav-link">About Me</a>
+  
+    <a href="/imprint" class="mobile-nav-link">Imprint</a>
+  
+    <a href="/privacy-policy" class="mobile-nav-link">Privacy Policy</a>
+  
+</nav>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
