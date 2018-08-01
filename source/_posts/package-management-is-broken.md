@@ -1,0 +1,47 @@
+---
+title: Package management is broken on all platforms
+date: 2018-08-01 16:31:06
+tags: Opinion
+---
+
+My friends, I gathered you here today to present a discussion starter which, for all intends and purposes, might as well just be called a rant. I do understand that the title might sound a little extreme, but let me present my arguments before you judge. The underlying issue of this ~~rant~~ blog post came to my attention while observing the transition that the Linux ecosystem went through in terms of packaging. Let me start to explain myself with the situation on Windows, as this builds up my expectations of package management.
+
+
+#### Windows
+
+What might seem really ridiculous to most Linux users is the norm for Windows users: Installing random binary files from all over the internet. Advanced users may be cautious about the source from which they are downloading the files, but checksums are rarely used in my experience. This is a major contribution to Windows' notoriety in terms of security. And it's not just the fact that the binaries may be malicious, many portals bundle all kinds of unwanted software with the installer.
+
+Now that we've covered the process of software acquirement we move on to the state of the union with regards to dependency management. I think everyone that has used Windows has at some point discovered the plethora of installed C++ redistributable packages. Multiple versions for both x32 and x64 architectures are bound to fill the installed software screen over time. That's maybe the example that is most visible. Most dependencies, however, do not appear there and quietly reside in the installation folder, blissfully unaware that they are completely redundant. This is the price you pay for portability. However, to complete the calculation one has to factor in the security impact, as vulnerabilities have to be patched for each occurrence of each dependency and not even by the dependency vendor but by the application packager/developer which might not even be active anymore.
+
+The next point on the list concerns application updating. Most of the time each application has it's own updater. Some of them run only when the application in question is running, some run always in the background. The result is that the user has to make sure that each application is up to date separately. A software developer might say the update complexity is linear in the number of installed packages. So far, so annoying. On top of that there are a number of applications that only check for updates and direct the user to the download page of the current version. This introduces additional work and also the problem of not knowing how the updating process behaves: Does the installer notice the installed version and upgrade it nicely or is the user expected to uninstall the old version first? Most of the time the former is the case, but what's annoying is that this is rarely communicated.
+
+I won't even mentioned Microsoft's sad excuse of an app store. Some of the aforementioned problems are generally really hard to solve but other operating systems have already ascended past this state. Let's take the rant to the next level.
+
+#### Linux
+
+Coming from Windows, the Linux way of managing packages seems like heaven at the first glance. One can just install a package from the command line or app center without worrying if the download source is reputable and in the knowledge that everything is at least somewhat curated. Updating the installed software happens alongside updating the system with one simple command. Libraries are shared among installed software allowing us to save resources and to make sure that security patches are deployed for every application. It seems like we've found the holy grail of package management, but it's not all sunshine and rainbows in Linux land.
+
+Firstly we have the opposite situation of Windows' dependency management. Everything that's to be gained in terms of security and decreased redundancy is payed for in the currency of portability. Developers do not only have to submit their work to the repository maintainers of each large distro, they also have to worry about what shared libraries are available on each one of them. Often this means that the current version of an application may only be available once the distro decides to ship a newer set of libraries. I understand that you probably can't have the best of both worlds and I agree that it's a compromise that is worth taking over the Windows situation. However, it also leads me to my main point.
+
+Over time I've noticed the trend that the system package manager or rather the default repositories are circumvented in an increasing rate. People want to use up-to-date software, not just in terms of security patches but also in terms of features. Developers want to ship their latest improvements. The bottleneck is that the process of getting these versions approved is often too slow or too bothersome for developers, especially those with fast release cycles. The result is that setting up a Linux installation today relies heavily on adding new developer controlled repositories for a lot of products. In my case it starts with Chrome, Atom, Slack and goes on and on and on. We've lost the aspect of curation and open up a lot of attack vectors. But we still have a central way for installing, uninstalling and updating, right?
+
+We all want more Linux adoption and key to achieving this is the availability of commonly used software. This burdens the developers with making sure their software is available for Debian, Red Hat, Arch and more, including their derivates. The solution recently brought forward are formats such as Snaps or AppImages which solve the issue of portability and fast deployment of changes. This however costs us our central place in the system to manage packages and introduces redundant dependencies.
+
+Other vendors like Nodejs are actively encouraging users to download installation scripts via curl and pipe them into bash. This is seriously insane and unsafe and does not solve any of the other problems in a satisfying way. Some might argue that it's not that unsafe if you take a look at the script first, provided you are familiar to bash. To those I recommend reading [this](https://www.idontplaydarts.com/2016/04/detecting-curl-pipe-bash-server-side/). Basically it's a way to detect the use of curl piped into bash at the server side such that the payload can be changed depending on it the script is only viewed or actually executed. If you don't have time to read the article you just have to remember to scrutinize the script in question like this: `curl https://example.com/setup.bash | (sleep 3; cat)`. Truly not ideal.
+
+Slowly we are converging from the perceived holy grail of packaging to the same situation Windows is in. I refuse to believe that this situation is the final destination of the whole issue. Maybe macOS has a solution?
+
+#### macOS
+
+Looking at macOS, we are overwhelmed by the different ways of installing packages. There is the app store which is actively used by developers and offers updating alongside the operating system similar to Linux. The majority of packages, however, are downloaded from random sites in the internet in the form of `.dmg` or `.app` packages, similar to how Windows handles it. A very notable downside is that it's sometimes the case that the uninstaller is bundled with the installer in a `.dmg`. To uninstall the package you have to search for the `.dmg` again which you probably won't even have on you machine anymore at that point.
+
+Fellow developers will probably already be shouting for Homebrew or MacPorts. I can't speak for MacPorts as I'm a brew user but let's have a look. Brew combines a very large repertoire with rapid deployments of new versions. This is of course accompanied with decreased curation and security. Another annoying observation I made is based in the way updates are sometimes handled. A upgrade of a minor python version is accompanied with a complete loss of all site packages, leaving the binaries (or in this case rather something like "application starters") for example in `/usr/local/bin` orphaned. So a simple update may deprive you of IPython, Ansible or Mercurial without warning.
+
+Graphical applications are only covered with brew cask, which works exactly like a normal installation of an `.app` or `.dmg` apart from introducing confusion about the updating process. These application usually come with their own updater as they are expected to be installed without a package manager but brew is also able to pull new versions. At least the uninstallation will be guaranteed painless.
+
+All in all the situation on macOS resembles a mixture of Windows and something like the Arch User Repository. There is not much insight to be gained here.
+
+
+#### Conclusion
+
+As I already said, on all operating systems we are converging to a situation we did not want to have in the first place. I situation we already thought to have overcome. New approaches only accelerate this convergence and instead of providing new ideas it just seems like old ones are just circumvented where needed. Maybe I'm to cynical or don't see the whole picture, but I can't see the light at the horizon. Maybe I also made a mistake somewhere in my assessment. I would really like to hear about your opinion on this matter. Contact me on `contact *dot* eg *at* posteo *dot* net`.
