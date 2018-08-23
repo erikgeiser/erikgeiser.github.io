@@ -1,10 +1,10 @@
 ---
 title: Necromancer
 date: 2017-12-17 17:53:11
-tags: CTF-Writeups
+tags: CTF
 ---
 
-The Necromancer CTF (available at [vulnhub](https://www.vulnhub.com/entry/the-necromancer-1,154/)) sends you on a journey to defeat the Necromancer that inhabits the OpenBSD based image. The fact that the flags kind of resembles an overarching story is a really nice touch on otherwise technically interresting but dry CTFs.
+The Necromancer CTF (available at [vulnhub](https://www.vulnhub.com/entry/the-necromancer-1,154/)) sends you on a journey to defeat the Necromancer that inhabits the OpenBSD based image. The fact that the flags kind of resembles an overarching story is a really nice touch on otherwise technically interesting but dry CTFs.
 
 {% asset_img "logo.jpeg" "Necromancer Logo" %}
 
@@ -61,7 +61,7 @@ In hindsight the next step makes a lot of sense, but the CTFs I did before were 
 
 {% asset_img "wireshark.png" "Wireshark Log" %}
 
-There it is! The Necromances want's to talk with us. Every minute a TCP SYN packet is sent to port 4444 of our machine. I had not anticipated something like that, because usually CTFs are based around (pseudo) realistic scenarios where this would not be likely to happen.
+There it is! The Necromancer want's to talk with us. Every minute a TCP SYN packet is sent to port 4444 of our machine. I had not anticipated something like that, because usually CTFs are based around (pseudo) realistic scenarios where this would not be likely to happen.
 
 But enough talk, let's here what he has to say:
 
@@ -160,7 +160,7 @@ Nice, no need to try out all the other possible hash functions. On to the next f
 
 ### 3rd Flag: The first encounter at the chasm
 
-The crows show us the way, so we saddle our webbrowser and follow. The 80 formed by the crows is a reference to the port through which unencrypted http traffic flows.
+The crows show us the way, so we saddle our web browser and follow. The 80 formed by the crows is a reference to the port through which unencrypted http traffic flows.
 
 {% asset_img "chasm.png" "The Chasm" %}
 
@@ -232,7 +232,7 @@ Enter passphrase:
 steghide: could not extract any data with that passphrase!
 ```
 
-No luck, I tried a few passphrases like "Necromancer", "necromancer", the number of crows (all black-white combinations as numbers and written out), the number of feathers, and a few variations of the last flag. This seems to be a dead end, but we don't give up just yet:
+No luck, I tried a few pass phrases like "Necromancer", "necromancer", the number of crows (all black-white combinations as numbers and written out), the number of feathers, and a few variations of the last flag. This seems to be a dead end, but we don't give up just yet:
 
 ```
 root@kali:~/ctf/necromancer# du -sh pileoffeathers.jpg
@@ -248,7 +248,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 37267         0x9193          End of Zip archive
 ```
 
-Binwalk reveals that we do not just have an image at hand: The file also contains a zip archive.
+`binwalk` reveals that we do not just have an image at hand: The file also contains a zip archive.
 
 ```
 root@kali:~/ctf/necromancer# mv pileoffeathers.jpg pileoffeathers.zip
@@ -327,7 +327,7 @@ Enter passphrase:
 steghide: could not extract any data with that passphrase!
 ```
 
-No luck this time and the journey takes an involuntary break for a few days. Well rested we give it another try, knowing we might have to think out of the box. If the next flag is another web page, we might be able to crack is using dirbuster, although looking at the last directory we probably won't get very far with the common wordlists. The text suggests that we need a magical item. A bit of research points me to CeWL which can generate custom wordlists from for example wikipedia. The closest thing wikipedia can provide is a list of mythological objects.
+No luck this time and the journey takes an involuntary break for a few days. Well rested we give it another try, knowing we might have to think out of the box. If the next flag is another web page, we might be able to crack is using `dirbuster`, although looking at the last directory we probably won't get very far with the common wordlists. The text suggests that we need a magical item. A bit of research points me to CeWL which can generate custom wordlists from for example wikipedia. The closest thing wikipedia can provide is a list of mythological objects.
 
 ```
 root@kali:~/ctf/necromancer# man cewl
@@ -696,7 +696,7 @@ Chant these words at u31337
 [Inferior 1 (process 10645) exited with code 0162]
 ```
 
-If you are wondering what happened here let me tell you. I disassmbled the binary's main function, which calls `wearTalisman` which is where the text we say earlier is printed (apparently gdb does not recognize this as a string which blows up the size of the function) but otherwise it does nothing interesting. `info functions` however revealed that there is a function called `chantToBreakSpell` which is neither called in `main` nor in `wearTalisman`, so I called it myself by breaking at the start of the program and consequently jumping to said function.
+If you are wondering what happened here let me tell you. I disassembled the binary's main function, which calls `wearTalisman` which is where the text we say earlier is printed (apparently gdb does not recognize this as a string which blows up the size of the function) but otherwise it does nothing interesting. `info functions` however revealed that there is a function called `chantToBreakSpell` which is neither called in `main` nor in `wearTalisman`, so I called it myself by breaking at the start of the program and consequently jumping to said function.
 
 
 ### 5th Flag: Throwback time
@@ -717,7 +717,7 @@ MAC Address: 08:00:27:DE:4E:19 (Oracle VirtualBox virtual NIC)
 Nmap done: 1 IP address (1 host up) scanned in 0.23 seconds
 ```
 
-As expected the port is open and a service named BackOrifice sits behind it. I recognize the name from the early-mid 2000s, when me and a friend of mine used to experiment with it on LAN parties (without success due to seriously limited knowledge at that time). It's an oldschool backdoor trojan. In this case I don't expect it to be the real BackOrifice, since I only recall it running on Windows, not on BSD, the necromancer's operating system of choice. Enough talk, let's chant the words:
+As expected the port is open and a service named BackOrifice sits behind it. I recognize the name from the early-mid 2000s, when me and a friend of mine used to experiment with it on LAN parties (without success due to seriously limited knowledge at that time). It's an old school backdoor trojan. In this case I don't expect it to be the real BackOrifice, since I only recall it running on Windows, not on BSD, the necromancer's operating system of choice. Enough talk, let's chant the words:
 
 ```
 root@kali:~/ctf/necromancer# nc -u 10.0.2.10 31337
@@ -806,7 +806,7 @@ root@kali:~/ctf/necromancer# tar xvf necromancer.tar
 necromancer.cap
 ```
 
-It's a packet capture file which we can open with wireshark:
+It's a packet capture file which we can open with `wireshark`:
 
 {% asset_img "pcap.png" "Packet Capture" %}
 

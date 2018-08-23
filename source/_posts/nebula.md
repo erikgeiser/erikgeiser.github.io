@@ -1,10 +1,10 @@
 ---
 title: Nebula
 date: 2017-03-15 15:43:28
-tags: CTF-Writeups
+tags: CTF
 ---
 
-This is a writeup of the Nebula CTF from [Exploit Exercises](https://exploit-exercises.com/). Although there is already a huge number of solutions I find it still valuable to add more since everyones has another thought process and one might still learn something new in different writeups. Also it is nice to have a reference of problems ones has solved at some point.
+This is a writeup of the Nebula CTF from [Exploit Exercises](https://exploit-exercises.com/). Although there is already a huge number of solutions I find it still valuable to add more since everyones has another thought process and one might still learn something new in different write ups. Also it is nice to have a reference of problems ones has solved at some point.
 
 Enough talk! Let's jump in...
 
@@ -28,7 +28,7 @@ level00@nebula:~$ find / -perm -4000 -user flag00 2> /dev/null
 /rofs/bin/.../flag00
 ```
 
-Note the minus in front of the 4000 that references the `setuid` flag. This is neccessary because we do not know anything about the permissions other than that one flag and the minus allows us to probe just for that. When doing such `find` searches in `/` it is also helpful to redirect `stderr` (`2> /dev/null`) such that there is no `Permission denied` spam.
+Note the minus in front of the 4000 that references the `setuid` flag. This is necessary because we do not know anything about the permissions other than that one flag and the minus allows us to probe just for that. When doing such `find` searches in `/` it is also helpful to redirect `stderr` (`2> /dev/null`) such that there is no `Permission denied` spam.
 
 Now we can claim the flag:
 
@@ -163,7 +163,7 @@ level03@nebula:/home/flag03$ echo "getflag | nc 127.0.0.1 3333" > writable.d/tes
 You have successfully executed getflag on a target account
 ```
 
-In this case, the command exectured by the cronjob is `getflag | nc 127.0.0.1 3333` which executes getflag and sends the output to port 3333 on the same host. Before the cronjob is executed we make sure to start a listener on said port with `nc -l 3333` which receives the target string. In hinsight it would probably be easer to have the cronjob just dump the string in a file with read permissions.
+In this case, the command exectuted by the cronjob is `getflag | nc 127.0.0.1 3333` which executes  `getflag` and sends the output to port 3333 on the same host. Before the cronjob is executed we make sure to start a listener on said port with `nc -l 3333` which receives the target string. In hindsight it would probably be easer to have the cronjob just dump the string in a file with read permissions.
 
 However, in a realistic scenario it would be way better to get complete shell access so we try and aim for that using a similar technique to the previous challenges: We write a little program in C and let the cronjob which runs as `flag03` compile it and set the `setuid` bit:
 
@@ -416,7 +416,7 @@ rtt min/avg/max/mdev = 0.014/0.031/0.051/0.015 ms
 </pre></body></html>getflag is executing on a non-flag account, this doesn't count
 ```
 
-We can inject the getflag command by adding another command to the ping statement via ";". To get the actual flag the cgi script has to be executed by `flag07`, which happens if it is called via the thttpd server listening on port 7007. To get the `;` to work in the Browser we have to encode it first, such that it is suitable for an URL. A quick search for an encoder reveals that the correct symbol is `%3B`, so we enter the URL into Firefox:
+We can inject the `getflag` command by adding another command to the ping statement via ";". To get the actual flag the cgi script has to be executed by `flag07`, which happens if it is called via the thttpd server listening on port 7007. To get the `;` to work in the Browser we have to encode it first, such that it is suitable for an URL. A quick search for an encoder reveals that the correct symbol is `%3B`, so we enter the URL into Firefox:
 
 ```bash
 Firefox URL bar: http://10.0.2.14:7007/index.cgi?Host=127.0.0.1%3Bgetflag

@@ -4,7 +4,7 @@
 
 # Site
 title: Erik's Blog
-subtitle: IT Security and CTF Write-ups
+subtitle: IT Security and CTF Write Ups
 description:
 keywords: CTF, Capture the Flag
 author: Erik Geiser
@@ -54,7 +54,7 @@ index_generator:
   order_by: -date
 
 # Category & Tag
-default_category: CTF
+default_category:
 category_map:
 tag_map:
 
@@ -62,7 +62,7 @@ tag_map:
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
 ## http://momentjs.com/docs/#/displaying/format/
-date_format: DD-MM-YYYY
+date_format: DD.MM.YYYY
 time_format: HH:mm:ss
 
 # Pagination

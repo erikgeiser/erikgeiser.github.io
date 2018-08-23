@@ -1,5 +1,5 @@
 ---
-title: Package management is broken on all platforms
+title: Why Package Management is Broken on all Platforms
 date: 2018-08-01 16:31:06
 tags: Opinion
 ---
